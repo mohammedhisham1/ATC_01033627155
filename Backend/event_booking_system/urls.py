@@ -20,15 +20,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
-from users.views import RegisterView, UserProfileView
 from events.views import EventViewSet, CategoryViewSet
 from bookings.views import BookingViewSet
+from users.views import RegisterView, UserProfileView, AdminUserViewSet, admin_dashboard_stats
+
 
 # Set up the DRF routers
 router = DefaultRouter()
 router.register(r'events', EventViewSet)
 router.register(r'categories', CategoryViewSet)
 router.register(r'bookings', BookingViewSet, basename='bookings')
+router.register(r'admin/users', AdminUserViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,7 +40,14 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/profile/', UserProfileView.as_view(), name='profile'),
+    path('api/admin/stats/', admin_dashboard_stats, name='admin-stats'),
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+
