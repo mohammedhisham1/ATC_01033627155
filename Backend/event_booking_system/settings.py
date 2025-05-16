@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-qr$l8*5a=5$$)8ny84n4ua8bvd$t_d)!@=odo1tbk5gxpl=g&g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['event-booking-api.vercel.app']
 CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_USER_MODEL = 'users.User'
