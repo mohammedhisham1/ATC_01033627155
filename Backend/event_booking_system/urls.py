@@ -41,7 +41,6 @@ urlpatterns = [
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/profile/', UserProfileView.as_view(), name='profile'),
     path('api/admin/stats/', admin_dashboard_stats, name='admin-stats'),
-
 ]
 
 if settings.DEBUG:
