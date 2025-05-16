@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.gis.db import models as gis_models
-from django.contrib.gis.geos import Point
 
 # Create your models here.
 
@@ -18,7 +16,8 @@ class Venue(models.Model):
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
-    location = gis_models.PointField(null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     capacity = models.IntegerField()
     amenities = models.JSONField(default=dict)
     
@@ -34,7 +33,7 @@ class Event(models.Model):
 
     title = models.CharField(max_length=200)
     description = models.TextField()
-    start_date = models.DateTimeField()
+    start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField()
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE, related_name='events')
     price = models.DecimalField(max_digits=10, decimal_places=2)
